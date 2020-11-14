@@ -1,0 +1,33 @@
+[INFO  - 2020-11-14T14:37:10.697Z] GhostDriver - Main - running on port 52222
+[INFO  - 2020-11-14T14:37:10.890Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1","webSecurityEnabled":true}
+[INFO  - 2020-11-14T14:37:10.890Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.customHeaders:  - {}
+[INFO  - 2020-11-14T14:37:10.891Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2020-11-14T14:37:10.891Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: e1182060-2686-11eb-b7f0-0725d3db49fc
+[ERROR - 2020-11-14T14:37:13.603Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - msg: An error has occurred: https://dbkpop.com/wp-content/uploads/cache/fvm/1602761747/out/header-e2dcd1b60fef9ad0e135d3ec92c668bbe9e1b452.min.js:35:813
+https://dbkpop.com/wp-content/uploads/cache/fvm/1602761747/out/header-e2dcd1b60fef9ad0e135d3ec92c668bbe9e1b452.min.js:35:167
+global code@https://dbkpop.com/wp-content/uploads/cache/fvm/1602761747/out/header-e2dcd1b60fef9ad0e135d3ec92c668bbe9e1b452.min.js:35:172
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-14T14:37:13.603Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - stack:
+  global code (https://dbkpop.com/wp-content/uploads/cache/fvm/1602761747/out/header-e2dcd1b60fef9ad0e135d3ec92c668bbe9e1b452.min.js:95)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-14T14:37:15.312Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - msg: ReferenceError: Can't find variable: cf
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-14T14:37:15.312Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - stack:
+  c (https://dbkpop.com/db/all-k-pop-idols:102)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-14T14:37:30.565Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - msg: TypeError: undefined is not a constructor (evaluating 'window.performance.getEntriesByType('paint')')
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2020-11-14T14:37:30.566Z] Session [e1182060-2686-11eb-b7f0-0725d3db49fc] - page.onError - stack:
+  getFirstContentfulPaint (https://stats.wp.com/e-202046.js:16)
+  view (https://stats.wp.com/e-202046.js:15)
+  push (https://stats.wp.com/e-202046.js:13)
+  STQ (https://stats.wp.com/e-202046.js:13)
+  initQueue (https://stats.wp.com/e-202046.js:13)
+  (anonymous function) (https://stats.wp.com/e-202046.js:18)
+
+  phantomjs://platform/console++.js:263 in error

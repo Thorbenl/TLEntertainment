@@ -1,2 +1,5 @@
+.idea
 venv
 data.json
+.env.prod
+.env.prod.db

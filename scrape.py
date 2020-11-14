@@ -1,57 +1,59 @@
-import requests
-import lxml.html as lh
+from sqlalchemy import create_engine, Float
+from bs4 import BeautifulSoup
+from selenium import webdriver
 import pandas as pd
-import sqlite3
+from sqlalchemy import Boolean
+from sqlalchemy.types import Integer, Text, DateTime
 
-conn = sqlite3.connect('TestDB2.db')
-c = conn.cursor()
-c.execute('CREATE TABLE ggs (Profile text, Name text, Short text, Korean_Name text, Debut text, Company text)')
-conn.commit()
-url = "https://dbkpop.com/db/k-pop-girlgroups"
 
-# Create a handle, page, to handle the contents of the website
-page = requests.get(url)
-# Store the contents of the website under doc
-doc = lh.fromstring(page.content)
-# Parse data that are stored between <tr>..</tr> of HTML
-tr_elements = doc.xpath('//tr')
-col = []
-i = 0
-# For each row, store each first element (header) and an empty list
-for t in tr_elements[0]:
-    i += 1
-    name = t.text_content()
-    col.append((name, []))
+### SQL ALCHEMY
+table_name = "idols"
+db_uri = "postgres+psycopg2://postgres:postgres@localhost:5432/postgres"
+engine = create_engine(db_uri, echo=True)
+###
 
-for j in range(1, len(tr_elements)):
-    # T is our j'th row
-    T = tr_elements[j]
+## Selenium
+browser = webdriver.Chrome()
+browser.get('https://dbkpop.com/db/all-k-pop-idols')
+#browser.find_element_by_xpath("//*[@id='table_1_next']").click()
 
-    # If row is not of size 10, the //tr data is not from our table
-    if len(T) != 10:
-        break
 
-    # i is the index of our column
-    i = 0
+soup = BeautifulSoup(browser.page_source, 'html.parser')
+browser.quit()
+##
 
-    # Iterate through each element of the row
-    for t in T.iterchildren():
-        data = t.text_content()
-        # Check if row is empty
-        if i > 0:
-            # Convert any numerical value to integers
-            try:
-                data = int(data)
-            except:
-                pass
-        # Append the data to the empty list of the i'th column
-        col[i][1].append(data)
-        # Increment i for the next column
-        i += 1
 
-Dict = {title: column for (title, column) in col}
-pd.DataFrame(Dict).to_sql('ggs', conn, if_exists='replace', index=True)
-c.execute("SELECT * FROM ggs")
+## Data Gen
+table = soup.find("table")
+table_data = [[cell.text for cell in row.find_all(["th", "td"])][1:]
+                        for row in table.find_all("tr")][1:]
+df = pd.DataFrame(table_data)
+df.columns = df.iloc[0, :]
+df.drop(index=0, inplace=True)
+print(df.head())
 
-for row in c.fetchall():
-    print(row)
+df.to_sql(
+    table_name,
+    engine,
+    if_exists='append',
+    index=True,
+    chunksize=500,
+    dtype={
+        "stage_name": Text,
+        "full_name": Text,
+        "korean_name": Text,
+        "korean_stage_name": Text,
+        "birthdate": DateTime,
+        "birthplace": Text,
+        "group": Text,
+        "other_group": Text,
+        "former_group": Text,
+        "country": Text,
+        "second_country": Text,
+        "height": Integer,
+        "weight": Float,
+        "debut": DateTime,
+        "gender": Text,
+        "position": Text,
+    }
+)
